@@ -16,20 +16,20 @@ export const GetConfigApi = (): Promise<baseResponse<GetConfigType>> => {
 }
 
 export interface UpdeateConfigReq {
-    UserName: string
-    PassWord: string
-    Url: string
-    ReloginTime: number
-    RechargeLink: string
-    SeparationTime: number
-    FreezeTime: number
+    username: string
+    password: string
+    url: string
+    reloginTime: number
+    rechargeLink: string
+    separationTime: number
+    freezeTime: number
 }
 
 export const UpdateConfigApi = (data:UpdeateConfigReq): Promise<baseResponse<string>> => {
     return request.post(`/api/updateConfig`,data)
 }
 export interface RunBotReq {
-    Switch: boolean
+    switch: boolean
 }
 
 export const RunBotApi = (data:RunBotReq): Promise<baseResponse<string>> => {

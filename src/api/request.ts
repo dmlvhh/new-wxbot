@@ -6,7 +6,8 @@ import { Message } from '@arco-design/web-react'
 // 创建一个名为 useAxios 的 axios 实例，设置基础URL为空字符串
 export const request = axios.create({
   // baseURL: API_BASE_URL
-  baseURL: ''
+  // baseURL: '/api'
+  baseURL: 'http://127.0.0.1:25577'
 })
 
 // 请求拦截器，用于在每个请求中添加 token 头部信息
@@ -23,7 +24,7 @@ request.interceptors.response.use(
   // 处理成功的响应
   (response) => {
     // 如果响应状态不是200，输出错误信息到控制台
-    if (response.status !== 200) {
+    if (response.status !== 0) {
       console.log('服务失败', response.status)
       // 使用 Message 组件显示错误信息
       Message.error(response.statusText)

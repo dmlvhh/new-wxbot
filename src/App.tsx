@@ -26,13 +26,13 @@ function App() {
             if (res.code !== 0) return
             setConf(res.data)
             form.setFieldsValue({
-                UserName: res.data.username,
-                PassWord: res.data.password,
-                Url: res.data.url,
-                ReloginTime: res.data.reloginTime,
-                RechargeLink: res.data.rechargeLink, // 注意字段名统一
-                SeparationTime: res.data.separationTime,
-                FreezeTime: res.data.freezeTime
+                username: res.data.username,
+                password: res.data.password,
+                url: res.data.url,
+                reloginTime: res.data.reloginTime,
+                rechargeLink: res.data.rechargeLink, // 注意字段名统一
+                separationTime: res.data.separationTime,
+                freezeTime: res.data.freezeTime
             })
         }
         getConfig()
@@ -74,7 +74,7 @@ function App() {
     }
     const [type,setType] = useState(false)
     const runBot = async (t:boolean) => {
-      const res = await RunBotApi({Switch:t})
+      const res = await RunBotApi({switch:t})
         if (res.code!==0)return
         setType(t)
         Message.success("操作成功！")
@@ -127,34 +127,34 @@ function App() {
             >
                 <Row gutter={24}>
                     <Col span={8}>
-                        <Form.Item label={'域名'} field="Url">
+                        <Form.Item label={'域名'} field="url">
                             <Input placeholder='请输入后台域名'/>
                         </Form.Item>
                     </Col>
                     <Col span={8}>
-                        <Form.Item label={'用户名'} field="UserName">
+                        <Form.Item label={'用户名'} field="username">
                             <Input placeholder='用户名'/>
                         </Form.Item>
                     </Col>
                     <Col span={8}>
-                        <Form.Item label={'密码'} field="PassWord">
+                        <Form.Item label={'密码'} field="password">
                             <Input.Password placeholder='密码'/>
                         </Form.Item>
                     </Col>
                 </Row>
                 <Row gutter={24}>
                     <Col span={8}>
-                        <Form.Item label={'自检链接'} field="RechargeLink">
+                        <Form.Item label={'自检链接'} field="rechargeLink">
                             <Input placeholder='自检链接'/>
                         </Form.Item>
                     </Col>
                     <Col span={8}>
-                        <Form.Item label={'冻结恢复'} field="FreezeTime">
+                        <Form.Item label={'冻结恢复'} field="freezeTime">
                             <InputNumber placeholder='冻结恢复'/>
                         </Form.Item>
                     </Col>
                     <Col span={8}>
-                        <Form.Item label={'机卡分离'} field="SeparationTime">
+                        <Form.Item label={'机卡分离'} field="separationTime">
                             <InputNumber placeholder='机卡分离'/>
                         </Form.Item>
                     </Col>
@@ -168,28 +168,28 @@ function App() {
                 <Button type='primary' onClick={()=>runBot(true)}>开始工作</Button>
                 <Button status={"danger"} onClick={()=>runBot(false)}>停止工作</Button>
             </Space>
-            <div style={{height: "20px"}}>
-                <Title heading={6} style={{color: "#2d88fb"}}>{'工作日志'}</Title>
-                <List
-                    virtualListProps={{
-                        height: 300,
-                    }}
-                    dataSource={new Array(10000).fill(null).map((_, index) => {
-                        const prefix = `0000${index}`.slice(-5);
-                        return {
-                            title: 'Beijing Bytedance Technology Co., Ltd.',
-                            description: `(${prefix}) Beijing ByteDance Technology Co., Ltd. is an enterprise located in China.`,
-                        };
-                    })}
-                    render={(item, index) => (
-                        <List.Item key={index}>
-                            <List.Item.Meta
-                                description={item.description}
-                            />
-                        </List.Item>
-                    )}
-                />
-            </div>
+            {/*<div style={{height: "20px"}}>*/}
+            {/*    <Title heading={6} style={{color: "#2d88fb"}}>{'工作日志'}</Title>*/}
+            {/*    <List*/}
+            {/*        virtualListProps={{*/}
+            {/*            height: 300,*/}
+            {/*        }}*/}
+            {/*        dataSource={new Array(10000).fill(null).map((_, index) => {*/}
+            {/*            const prefix = `0000${index}`.slice(-5);*/}
+            {/*            return {*/}
+            {/*                title: 'Beijing Bytedance Technology Co., Ltd.',*/}
+            {/*                description: `(${prefix}) Beijing ByteDance Technology Co., Ltd. is an enterprise located in China.`,*/}
+            {/*            };*/}
+            {/*        })}*/}
+            {/*        render={(item, index) => (*/}
+            {/*            <List.Item key={index}>*/}
+            {/*                <List.Item.Meta*/}
+            {/*                    description={item.description}*/}
+            {/*                />*/}
+            {/*            </List.Item>*/}
+            {/*        )}*/}
+            {/*    />*/}
+            {/*</div>*/}
         </Card>
     )
 }
