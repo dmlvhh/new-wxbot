@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react'
+import {useEffect, useMemo, useRef, useState} from 'react'
 import './App.css'
 import {
     Grid,
@@ -8,7 +8,18 @@ import {
 } from '@arco-design/web-react';
 import {Form, Input, Button} from '@arco-design/web-react';
 import Title from "@arco-design/web-react/es/Typography/title";
-import {GetConfigApi, GetConfigType, RunBotApi, RunBotReq, UpdateConfigApi, UpdeateConfigReq} from "@/api/bot";
+import {
+    AbnormalLineApi,
+    GetConfigApi,
+    GetConfigType,
+    RunBotApi,
+    RunBotReq,
+    UpdateConfigApi,
+    UpdeateConfigReq,
+    WorkLineApi
+} from "@/api/bot";
+import PublicOpinionCard, {PublicOpinionCardProps} from "@/components/data-analysis/PublicOpinionCard";
+// import styles from './style/index.module.less'
 
 const {Row, Col} = Grid
 const {useForm} = Form
@@ -72,15 +83,80 @@ function App() {
         Message.success("保存成功！")
         getConfig()
     }
-    const [type,setType] = useState(false)
-    const runBot = async (t:boolean) => {
-      const res = await RunBotApi({switch:t})
-        if (res.code!==0)return
+    const [type, setType] = useState(false)
+
+    const runBot = async (t: boolean) => {
+        const res = await RunBotApi({switch: t})
+        if (res.code !== 0) return
         setType(t)
         Message.success("操作成功！")
     }
+    const cardInfo = [
+        {
+            key: 'workLine',
+            type: 'line',
+            api: WorkLineApi
+        },
+        {
+            key: 'abnormalLine',
+            type: 'line',
+            api: AbnormalLineApi
+        },
+    ]
+    const [loading, setLoading] = useState(true)
+    const [cardData, setCardData] = useState<PublicOpinionCardProps[]>(
+        cardInfo.map((item) => ({
+            ...item,
+            chart_type: item.type as 'line' | 'pie' | 'interval'
+        }))
+    )
+    const formatData = useMemo(() => {
+        return cardData.map((item) => ({
+            ...item
+        }))
+    }, [data])
+
+    const getData = async () => {
+        try {
+            // 分别请求每个接口
+            const requestList = cardInfo.map(async (info) => {
+                const res = await info.api() // 调用真实的 API
+                if (res.code !== 0) {
+                    return {
+                        key: info.key,
+                        chartType: info.type
+                    }
+                }
+                return {
+                    ...res.data
+                }
+            })
+            // 等待所有接口返回数据
+            const result = await Promise.all(requestList)
+            // console.log('Res', result)
+            setCardData(result)
+        } catch (error) {
+            console.error('Error fetching data:', error)
+        } finally {
+            setLoading(false) // 无论成功或失败，都关闭加载状态
+        }
+    }
+    useEffect(() => {
+        getData()
+    }, [])
     return (
-        <Card bordered={false} style={{marginTop: "-20px"}}>
+        <Card bordered={false}>
+            <div style={{display: "flex",justifyContent:"space-between",alignItems:"center"}}>
+                <Title heading={6} style={{color: "#2d88fb", margin: 0}}>{'数据中心'}</Title>
+                <Button style={{marginBottom:"5px"}} type='primary' size={"mini"} onClick={getData}>刷新</Button>
+            </div>
+            <Row gutter={20}>
+                {formatData.map((item, index) => (
+                    <Col span={12} key={index}>
+                        <PublicOpinionCard {...item} loading={loading}/>
+                    </Col>
+                ))}
+            </Row>
             <Title heading={6} style={{color: "#2d88fb"}}>{'机器人信息'}</Title>
             <Row gutter={24}>
                 <Col span={2}>
@@ -165,8 +241,8 @@ function App() {
             </Form>
             <Title heading={6} style={{color: "#2d88fb"}}>{'控制中心'}</Title>
             <Space size='large'>
-                <Button type='primary' onClick={()=>runBot(true)}>开始工作</Button>
-                <Button status={"danger"} onClick={()=>runBot(false)}>停止工作</Button>
+                <Button type='primary' onClick={() => runBot(true)}>开始工作</Button>
+                <Button status={"danger"} onClick={() => runBot(false)}>停止工作</Button>
             </Space>
             {/*<div style={{height: "20px"}}>*/}
             {/*    <Title heading={6} style={{color: "#2d88fb"}}>{'工作日志'}</Title>*/}

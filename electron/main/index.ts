@@ -49,8 +49,8 @@ async function createWindow() {
     title: 'wx_bot',
     icon: path.join(process.env.VITE_PUBLIC, 'favicon.ico'),
     autoHideMenuBar: true,
-    width: 860,  // 设置窗口宽度
-    height: 500,  // 设置窗口高度
+    width: 1080,  // 设置窗口宽度
+    height: 650,  // 设置窗口高度
     webPreferences: {
       preload,
       // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
