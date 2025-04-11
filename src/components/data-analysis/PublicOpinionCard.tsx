@@ -8,13 +8,13 @@ const { Title, Text } = Typography
 
 export interface PublicOpinionCardProps {
     key: string
-    title: string
-    chart_data?: any[]
-    chart_type: 'line' | 'interval' | 'pie'
+    title?: string
+    chartData?: any[]
+    chartType: 'line' | 'interval' | 'pie'
     count?: number
     increment?: boolean
     diff?: number
-    compare_time?: string
+    compareTime?: string
     loading?: boolean
 }
 function PublicOpinionCard(props: PublicOpinionCardProps) {

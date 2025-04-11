@@ -9,7 +9,7 @@ const basicChartProps = {
     height: 80,
     padding: [10, 10, 0, 10]
 }
-function SimpleLine(props: { chartData: any[] }) {
+function SimpleLine(props: { chartData: any[]|undefined }) {
     const { chartData } = props
 
     return (

@@ -13,13 +13,12 @@ import {
     GetConfigApi,
     GetConfigType,
     RunBotApi,
-    RunBotReq,
     UpdateConfigApi,
     UpdeateConfigReq,
     WorkLineApi
 } from "@/api/bot";
 import PublicOpinionCard, {PublicOpinionCardProps} from "@/components/data-analysis/PublicOpinionCard";
-// import styles from './style/index.module.less'
+import {an} from "vitest/dist/chunks/reporters.nr4dxCkA";
 
 const {Row, Col} = Grid
 const {useForm} = Form
@@ -69,7 +68,7 @@ function App() {
         },
         {
             label: '授权日期',
-            value: '2025-03-19 21:43:20',
+            value: '2025-04-01 21:43:20',
         },
         {
             label: '到期时间',
@@ -104,10 +103,10 @@ function App() {
         },
     ]
     const [loading, setLoading] = useState(true)
-    const [cardData, setCardData] = useState<PublicOpinionCardProps[]>(
+    const [cardData, setCardData] = useState(
         cardInfo.map((item) => ({
             ...item,
-            chart_type: item.type as 'line' | 'pie' | 'interval'
+            chartType: item.type as 'line' | 'pie' | 'interval'
         }))
     )
     const formatData = useMemo(() => {
@@ -134,7 +133,7 @@ function App() {
             // 等待所有接口返回数据
             const result = await Promise.all(requestList)
             // console.log('Res', result)
-            setCardData(result)
+            setCardData(result as any)
         } catch (error) {
             console.error('Error fetching data:', error)
         } finally {

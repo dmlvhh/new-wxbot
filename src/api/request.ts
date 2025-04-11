@@ -7,7 +7,7 @@ import { Message } from '@arco-design/web-react'
 export const request = axios.create({
   // baseURL: API_BASE_URL
   baseURL: '/api'
-  // baseURL: 'http://127.0.0.1:25577'
+  // baseURL: 'http://111.170.34.220:25577'
 })
 
 // 请求拦截器，用于在每个请求中添加 token 头部信息
