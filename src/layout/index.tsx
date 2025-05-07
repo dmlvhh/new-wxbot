@@ -12,7 +12,7 @@ const Content = Layout.Content;
 function BaseMenu(props) {
     return (
         <Menu defaultOpenKeys={['1']} defaultSelectedKeys={['0_2']} {...props}>
-            <MenuItem key='0_1' >
+            <MenuItem key='0_1' disabled>
                 <IconHome />
                 Menu 1
             </MenuItem>
@@ -31,6 +31,15 @@ function BaseMenu(props) {
             >
                 <MenuItem key='1_1'>Menu 1</MenuItem>
                 <MenuItem key='1_2'>Menu 2</MenuItem>
+                <SubMenu key='2' title='Navigation 2'>
+                    <MenuItem key='2_1'>Menu 1</MenuItem>
+                    <MenuItem key='2_2'>Menu 2</MenuItem>
+                </SubMenu>
+                <SubMenu key='3' title='Navigation 3'>
+                    <MenuItem key='3_1'>Menu 1</MenuItem>
+                    <MenuItem key='3_2'>Menu 2</MenuItem>
+                    <MenuItem key='3_3'>Menu 3</MenuItem>
+                </SubMenu>
             </SubMenu>
             <SubMenu
                 key='4'
@@ -75,7 +84,7 @@ class App extends React.Component<any, any> {
                     width={220}
                     collapsible
                 >
-                    <div className='logo'/>
+                    <div className='logo' />
                     <BaseMenu
                         onClickMenuItem={(key) =>
                             Message.info({
@@ -84,11 +93,11 @@ class App extends React.Component<any, any> {
                             })
                         }
                         theme='dark'
-                        style={{width: '100%', height: "88vh"}}
+                        style={{ width: '100%' }}
                     />
                 </Sider>
                 <Layout>
-                <Header>
+                    <Header>
                         <BaseMenu mode='horizontal' />
                     </Header>
                     <Layout style={{ padding: '0 24px' }}>
@@ -98,11 +107,10 @@ class App extends React.Component<any, any> {
                             <Breadcrumb.Item>App</Breadcrumb.Item>
                         </Breadcrumb>
                         <Content>Content</Content>
-                        {/*<Footer>Footer</Footer>*/}
+                        <Footer>Footer</Footer>
                     </Layout>
                 </Layout>
             </Layout>
-
         );
     }
 }
