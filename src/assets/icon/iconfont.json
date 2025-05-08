@@ -1,0 +1,44 @@
+{
+  "id": "4915189",
+  "name": "AI",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "6762077",
+      "name": "机器人",
+      "font_class": "jiqiren",
+      "unicode": "e6ac",
+      "unicode_decimal": 59052
+    },
+    {
+      "icon_id": "8121245",
+      "name": "消息",
+      "font_class": "xiaoxi",
+      "unicode": "e64b",
+      "unicode_decimal": 58955
+    },
+    {
+      "icon_id": "8922356",
+      "name": "机器人",
+      "font_class": "jiqiren1",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "11121359",
+      "name": "应用",
+      "font_class": "yingyong",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
+      "icon_id": "22632589",
+      "name": "好友",
+      "font_class": "haoyou",
+      "unicode": "e631",
+      "unicode_decimal": 58929
+    }
+  ]
+}

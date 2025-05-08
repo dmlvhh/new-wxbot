@@ -1,0 +1,190 @@
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  height: 88vh;
+  background-color: #f5f5f5;
+
+  .chat-header {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    padding: 0 16px;
+
+    .user-info {
+      display: flex;
+      align-items: center;
+
+      .icon {
+        font-size: 20px;
+        margin-right: 8px;
+      }
+
+      .username {
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      .tag {
+        background-color: #6c4efb;
+        color: white;
+        padding: 2px 6px;
+        font-size: 12px;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    background-color: #f0f0f0;
+    transition: padding 0.3s ease-in-out; /* 平滑过渡 */
+
+    // 初始滚动条 thumb 设置透明
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0); // 初始完全透明
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    // 悬停时使滚动条 thumb 显示
+    &:hover::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.3); // 悬停时显示
+    }
+
+    &:hover::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(0, 0, 0, 0.5); // 鼠标在滚动条上时加深
+    }
+
+    .chat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-bottom: 12px;
+
+      .chat-meta {
+        display: flex;
+        align-items: center;
+        margin-bottom: 4px;
+
+        .username {
+          font-size: 13px;
+          color: #555;
+          margin-right: 6px;
+        }
+
+        .avatar {
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+        }
+      }
+
+      .bubble {
+        background-color: #6c4efb;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 10px;
+        max-width: 60%;
+        font-size: 14px;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      // 左边的气泡样式（别人发的）
+      &.other {
+        align-items: flex-start;
+
+        .bubble {
+          background-color: #fff;
+          color: #333;
+          border: 1px solid #ccc;
+          white-space: pre-wrap;
+          word-break: break-word;
+        }
+      }
+    }
+  }
+
+  .chat-bottom {
+    border-top: 1px solid #eee;
+    background-color: #fff;
+
+    .toolbar {
+      padding: 10px 16px;
+      display: flex;
+      gap: 16px;
+      font-size: 20px;
+    }
+
+    .input-area {
+      background: #f7f7f8;
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      textarea {
+        resize: none;
+        padding: 10px 14px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        //background-color: #f7f7f8;
+        background-color: transparent; // 背景由 .input-area 控制
+        outline: none;
+        line-height: 1.5;
+        min-height: 60px;
+        max-height: 160px;
+        overflow-y: auto;
+      }
+
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+        color: #888;
+
+        .counter {
+          color: #00c292; // 青绿色
+        }
+
+        .hint {
+          flex: 1;
+          text-align: right;
+          margin-right: 12px;
+        }
+
+        button {
+          background-color: #6f3ff5;
+          color: white;
+          padding: 6px 18px;
+          border: none;
+          border-radius: 20px;
+          font-size: 14px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+
+          &:hover {
+            background-color: darken(#6f3ff5, 8%);
+          }
+        }
+      }
+    }
+  }
+}
