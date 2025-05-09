@@ -1,10 +1,13 @@
 import {Avatar, Button, Input, Layout, List, Space, Typography} from "@arco-design/web-react";
-import { IconPlus, IconSearch, IconToTop } from "@arco-design/web-react/icon";
+import {IconPlus, IconSearch, IconToTop} from "@arco-design/web-react/icon";
 import ChatWindow from "@/components/chatWindow";
+import {useState} from "react";
+
 const Sider = Layout.Sider;
 const Header = Layout.Header;
 const Content = Layout.Content;
 const Message = () => {
+    const [selectedId, setSelectedId] = useState<number | null>(null);
     const data = [
         {
             id: 1,
@@ -34,10 +37,18 @@ const Message = () => {
             lastMessage: '请继续输入你的问题。',
             avatar: '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
         },
+        {
+            id: 5,
+            name: '网卡助手 N1',
+            time: '昨天 12:00',
+            lastMessage: '请继续输入你的问题。',
+            avatar: '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+        },
     ];
+    const selectedChat = data.find((item) => item.id === selectedId);
 
     return (
-        <Layout style={{ height: '100vh' }}>
+        <Layout style={{height: '100vh'}}>
             <Sider style={{width: 240}}>
                 <div>
                     <div style={{display: "flex", justifyContent: "center", alignItems: "center", paddingTop: 10}}>
@@ -62,10 +73,12 @@ const Message = () => {
                         render={(item) => (
                             <div
                                 key={item.id}
+                                onClick={() => setSelectedId(item.id)} // 关键：点击切换会话
                                 style={{
                                     display: "flex",
                                     cursor: "pointer",
                                     padding: "10px",
+                                    backgroundColor: selectedId === item.id ? "#f0f0f0" : "white",
                                     borderBottom: "1px solid #eee",
                                 }}
                             >
@@ -94,7 +107,7 @@ const Message = () => {
                     />
                 </div>
             </Sider>
-            <Content style={{padding: 20}}>  <ChatWindow /></Content>
+            <Content style={{padding: 20}}>    <ChatWindow chat={selectedChat} /></Content>
         </Layout>
 
     );

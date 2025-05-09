@@ -50,7 +50,7 @@ async function createWindow() {
     icon: path.join(process.env.VITE_PUBLIC, 'favicon.ico'),
     autoHideMenuBar: true,
     width: 1080,  // 设置窗口宽度
-    height: 650,  // 设置窗口高度
+    height: 716,  // 设置窗口高度
     webPreferences: {
       preload,
       // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
