@@ -1,33 +1,25 @@
 import React from 'react'
 import LoginForm from './form'
-import LoginBanner from './banner'
 import styles from './index.module.scss'
-import Footer from "@arco-design/web-react/es/DatePicker/panels/footer";
+import {Avatar} from "@arco-design/web-react";
 
 function Login() {
-
-  return (
-    <div className={styles.container}>
-      <div className={styles.logo}>
-        {/*<Logo />*/}
-        <div className={styles['logo-text']}>Enternal</div>
-      </div>
-      <div className={styles.banner}>
-        <div className={styles['banner-inner']}>
-          <LoginBanner />
+    return (
+        <div className={styles.container}>
+            <div className={styles.logo}><Avatar className={styles.avatar} shape={"square"}  size={40} >
+                <img
+                     alt='avatar'
+                     src='/src/assets/logo.png'
+                />
+            </Avatar>
+                <div className={styles.title}>小曜灵码</div>
+            </div>
+            <div className={styles.desc}>你身边的智能ai与bot</div>
+            <div>
+                <LoginForm/>
+            </div>
         </div>
-      </div>
-      <div className={styles.content}>
-        <div className={styles['content-inner']}>
-          <LoginForm />
-        </div>
-        <div className={styles.footer}>
-          <Footer />
-        </div>
-      </div>
-    </div>
-  )
+    )
 }
-Login.displayName = 'LoginPage'
 
 export default Login

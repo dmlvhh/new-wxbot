@@ -10,23 +10,20 @@ import Empty from "@/pages/empty/index"
 
 
 const router = createBrowserRouter([
-    // {
-    //     path: '/login',
-    //     element: <Login/>
-    // },
     {
         path: '/',
+        element: <Login/>,
+    },  {
+        path: '/login',
+        element: <Login/>,
+    },  {
+        path: '/main',
         element: <MainLayout/>,
-        // element: <Login/>,
         children: [
-            {
-                path: '/',
-                element: <Empty/>,
-            },
-            {
-                path: 'pc_detail/:md5',
-                element: <Index/>,
-            },
+            // {
+            //     path: '/',
+            //     element: <Login/>,
+            // },
             {
                 path: 'message',
                 element: <Message/>,
@@ -45,6 +42,7 @@ const router = createBrowserRouter([
             },
         ],
     },
+
 
 ])
 

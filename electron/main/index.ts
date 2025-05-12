@@ -43,16 +43,24 @@ if (!app.requestSingleInstanceLock()) {
 let win: BrowserWindow | null = null
 const preload = path.join(__dirname, '../preload/index.mjs')
 const indexHtml = path.join(RENDERER_DIST, 'index.html')
-
+const login_width = 300
+const login_height = 360
+const register_height = 490
 async function createWindow() {
   win = new BrowserWindow({
     title: 'wx_bot',
     icon: path.join(process.env.VITE_PUBLIC, 'favicon.ico'),
     autoHideMenuBar: true,
-    width: 1080,  // 设置窗口宽度
-    height: 716,  // 设置窗口高度
+    width: login_width,  // 设置窗口宽度
+    height: login_height,  // 设置窗口高度
+    resizable: false,
+    titleBarStyle:'hidden',
+    frame: false,             // 去掉系统默认边框
+    hasShadow: true,          // 阴影效果
     webPreferences: {
       preload,
+      nodeIntegration: true,
+      // contextIsolation: false,
       // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
       // nodeIntegration: true,
 

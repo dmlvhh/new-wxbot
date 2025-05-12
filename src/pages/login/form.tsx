@@ -1,11 +1,11 @@
-import {Button, Form, Input, Message, Space} from '@arco-design/web-react'
+import {Button, Checkbox, Form, Input, Link, Space} from '@arco-design/web-react'
 import {FormInstance} from '@arco-design/web-react/es/Form'
-import {IconLock, IconUser} from '@arco-design/web-react/icon'
+import {IconCode, IconLock, IconUser} from '@arco-design/web-react/icon'
 import React, {useRef, useState} from 'react'
 import styles from './index.module.scss'
-import {LoginApi} from '@/api/user'
+// import {LoginApi} from '@/api/user'
 import {useDispatch} from 'react-redux'
-import {setToken, setUserInfo} from "@/store/modules/usersSlice";
+// import {setToken, setUserInfo} from "@/store/modules/usersSlice";
 import {useNavigate} from "react-router-dom";
 
 export default function LoginForm() {
@@ -17,26 +17,27 @@ export default function LoginForm() {
 
 
     const login = async (params) => {
-        const res = await LoginApi(params)
-        if (res.code !== 200) return
-        dispatch(setUserInfo(res.data.username))
-        dispatch(setToken(res.data.token))
-        nav("/")
+        // const res = await LoginApi(params)
+        // if (res.code !== 200) return
+        // dispatch(setUserInfo(res.data.username))
+        // dispatch(setToken(res.data.token))
+        // nav("/")
     }
 
     const onSubmitClick = async () => {
-        const values = await formRef.current.validate()
-        await login(values)
+        // const values = await formRef.current.validate()
+        // await login(values)
     }
+    // const [loginParams, setLoginParams, removeLoginParams] = useStorage('loginParams')
+
+    const [rememberPassword, setRememberPassword] = useState(false)
 
     return (
         <div className={styles['login-form-wrapper']}>
-            <div className={styles['login-form-title']}>Login to Enternal</div>
-            <div className={styles['login-form-error-msg']}>{errorMessage}</div>
             <Form
                 className={styles['login-form']}
                 layout="vertical"
-                ref={formRef}
+                // ref={formRef}
                 initialValues={{username: 'admin', password: '123456'}}
             >
                 <Form.Item
@@ -51,10 +52,22 @@ export default function LoginForm() {
                 >
                     <Input.Password prefix={<IconLock/>} placeholder={'密码'} onPressEnter={onSubmitClick}/>
                 </Form.Item>
-                <Space size={16} direction="vertical">
+                <Form.Item
+                    field="code"
+                    rules={[{required: true, message: '请输入授权码'}]}
+                >
+                    <Input allowClear placeholder={'授权码'}/>
+                </Form.Item>
+                <Space size={10} direction="vertical">
                     <Button type="primary" long onClick={onSubmitClick} loading={loading}>
-                        {'登录'}
+                        登录
                     </Button>
+                    <div className={styles['login-form-password-actions']}>
+                        <Checkbox checked={rememberPassword} onChange={setRememberPassword}>
+                            记住密码
+                        </Checkbox>
+                        <Link>忘记密码</Link>
+                    </div>
                 </Space>
             </Form>
         </div>
