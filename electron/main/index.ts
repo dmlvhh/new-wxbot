@@ -117,6 +117,14 @@ app.on('activate', () => {
   }
 })
 
+
+ipcMain.on('set-loginWH', (event, w, h) => {
+  if (win) {
+    win.setSize(w, h);
+    win.center(); // 可选
+  }
+});
+
 // New window example arg: new windows url
 ipcMain.handle('open-win', (_, arg) => {
   const childWindow = new BrowserWindow({
@@ -133,3 +141,4 @@ ipcMain.handle('open-win', (_, arg) => {
     childWindow.loadFile(indexHtml, { hash: arg })
   }
 })
+

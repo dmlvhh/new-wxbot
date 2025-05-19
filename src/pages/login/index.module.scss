@@ -35,3 +35,23 @@
     justify-content: space-between;
   }
 }
+.header {
+  -webkit-app-region: drag; // ✅ 可拖动区域
+  user-select: none;
+}
+.formWrapper {
+  -webkit-app-region: no-drag; // 🚫 防止输入框干扰拖动
+  margin-top: 16px;
+}
+
+.loading-panel {
+  height: calc(100vh - 32px);
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  overflow: hidden;
+
+  img {
+    width: 100px;
+  }
+}

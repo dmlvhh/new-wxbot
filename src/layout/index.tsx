@@ -14,22 +14,24 @@ const Sider = Layout.Sider;
 const Header = Layout.Header;
 const Content = Layout.Content;
 import logo from '@/assets/logo.png';
+import WinOp from "@/components/winOp";
 const MainLayout = () => {
     const navigate = useNavigate();
 
     const handleMenuClick = (key: string) => {
+        console.log("k",key)
         switch (key) {
             case '0':
-                navigate('/message');
+                navigate('message');
                 break;
             case '1':
-                navigate('/friend');
+                navigate('friend');
                 break;
             case '2':
-                navigate('/models');
+                navigate('models');
                 break;
             case '3':
-                navigate('/apps');
+                navigate('apps');
                 break;
             default:
                 break;
@@ -69,6 +71,7 @@ const MainLayout = () => {
                 <Layout style={{ flex: 1 }}>
                     <Outlet />
                 </Layout>
+                <WinOp showClose={true} showMax={true} showMin={true} showSetTop={true} />
             </Layout>
         </Layout>
     );

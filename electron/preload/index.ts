@@ -20,7 +20,7 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
   },
 
   // You can expose other APTs you need here.
-  // ...
+
 })
 
 // --------- Preload scripts loading ---------
@@ -116,3 +116,10 @@ window.onmessage = (ev) => {
 }
 
 setTimeout(removeLoading, 4999)
+
+
+
+contextBridge.exposeInMainWorld('electronAPI', {
+  setTitle: (title) => ipcRenderer.send('set-title', title),
+  setLoginWH: (w, h) => ipcRenderer.send('set-loginWH', w, h),
+})

@@ -8,12 +8,12 @@ import {useDispatch} from 'react-redux'
 // import {setToken, setUserInfo} from "@/store/modules/usersSlice";
 import {useNavigate} from "react-router-dom";
 
-export default function LoginForm() {
+export default function LoginForm({ setLoading }: { setLoading: (v: boolean) => void }) {
     const nav = useNavigate()
     const dispatch = useDispatch()
     const formRef = useRef<FormInstance>()
     const [errorMessage, setErrorMessage] = useState('')
-    const [loading, setLoading] = useState(false)
+    // const [loading, setLoading] = useState(false)
 
 
     const login = async (params) => {
@@ -22,11 +22,17 @@ export default function LoginForm() {
         // dispatch(setUserInfo(res.data.username))
         // dispatch(setToken(res.data.token))
         // nav("/")
+        setLoading(true)
+        setTimeout(() => {
+            window.electronAPI.setLoginWH(1080, 630);
+            nav('main');
+        }, 1000);
+        setLoading(false);
     }
 
     const onSubmitClick = async () => {
-        // const values = await formRef.current.validate()
-        // await login(values)
+        const values = await formRef.current.validate()
+        await login(values)
     }
     // const [loginParams, setLoginParams, removeLoginParams] = useStorage('loginParams')
 
@@ -37,7 +43,7 @@ export default function LoginForm() {
             <Form
                 className={styles['login-form']}
                 layout="vertical"
-                // ref={formRef}
+                ref={formRef}
                 initialValues={{username: 'admin', password: '123456'}}
             >
                 <Form.Item
@@ -59,7 +65,7 @@ export default function LoginForm() {
                     <Input allowClear placeholder={'授权码'}/>
                 </Form.Item>
                 <Space size={10} direction="vertical">
-                    <Button type="primary" long onClick={onSubmitClick} loading={loading}>
+                    <Button type="primary" long onClick={onSubmitClick} >
                         登录
                     </Button>
                     <div className={styles['login-form-password-actions']}>
