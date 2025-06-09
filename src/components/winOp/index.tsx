@@ -1,77 +1,87 @@
-import React, {useState} from 'react';
-import styles from "./index.module.scss"
-import classNames from 'classnames';
+import React, {useEffect, useState} from 'react';
+import "./index.module.scss"
 
-interface WinOpProps {
+interface WindowControlsProps {
     showSetTop?: boolean;
     showMin?: boolean;
     showMax?: boolean;
     showClose?: boolean;
-    closeType?: number; // 0:关闭窗口，1:隐藏窗口
-    onCloseCallBack?: () => void;
+    closeType?: 0 | 1; // 0: 关闭窗口, 1: 隐藏窗口
+    onCloseCallback?: () => void;
 }
 
-const WinOp: React.FC<WinOpProps> = ({
-//     export default function WinOp ({
-                                         showSetTop = true,
-                                         showMin = true,
-                                         showMax = true,
-                                         showClose = true,
-                                         closeType = 1,
-                                         onCloseCallBack,
-                                     }) => {
+const WindowControls: React.FC<WindowControlsProps> = ({
+        showSetTop = true,
+        showMin = true,
+        showMax = true,
+        showClose = true,
+        closeType = 1,
+        onCloseCallback   }) => {
     const [isMax, setIsMax] = useState(false);
     const [isTop, setIsTop] = useState(false);
+
+    useEffect(() => {
+        setIsMax(false);
+        setIsTop(false);
+    }, []);
 
     const winOp = (action: string, data?: any) => {
         window.ipcRenderer?.send('winTitleOp', {action, data});
     };
 
-    const close = () => {
+    const handleClose = () => {
         winOp('close', {closeType});
-        if (onCloseCallBack) onCloseCallBack();
+        onCloseCallback?.();
     };
 
-    const minimize = () => {
+    const handleMinimize = () => {
         winOp('minimize');
     };
 
-    const maximize = () => {
-        const next = !isMax;
-        setIsMax(next);
-        winOp(next ? 'maximize' : 'unmaximize');
+    const handleMaximize = () => {
+        const nextMax = !isMax;
+        setIsMax(nextMax);
+        winOp(nextMax ? 'maximize' : 'unmaximize');
     };
 
-    const top = () => {
-        const next = !isTop;
-        setIsTop(next);
-        winOp('top', {top: next});
+    const handleTop = () => {
+        const nextTop = !isTop;
+        setIsTop(nextTop);
+        winOp('top', {top: nextTop});
     };
 
     return (
-        <div className={`${styles['win-op']} no-drag`}>
-            {showSetTop && (
-                <div
-                    className={classNames('iconfont', 'icon-top', {[styles['win-top']]: isTop})}
-                    onClick={top}
-                    title={isTop ? '取消置顶' : '置顶'}
-                ></div>
-            )}
-            {showMin && (
-                <div className="iconfont icon-min" onClick={minimize} title="最小化"></div>
-            )}
-            {showMax && (
-                <div
-                    className={classNames('iconfont', isMax ? 'icon-maximize' : 'icon-max')}
-                    onClick={maximize}
-                    title={isMax ? '向下还原' : '最大化'}
-                ></div>
-            )}
-            {showClose && (
-                <div className="iconfont icon-close" onClick={close} title="关闭"></div>
-            )}
-        </div>
+            <div className="win-op no-drag">
+                {showSetTop && (
+                    <div
+                        className={`iconfont icon-icon_top ${isTop ? 'win-top' : ''}`}
+                        onClick={handleTop}
+                        title={isTop ? '取消置顶' : '置顶'}
+                    />
+                )}
+                {showMin && (
+                    <div
+                        className="iconfont icon-icon_min"
+                        onClick={handleMinimize}
+                        title="最小化"
+                    />
+                )}
+                {showMax && (
+                    <div
+                        className={`iconfont ${isMax ? 'icon-lu-icon-maximize' : 'icon-icon-max'}`}
+                        onClick={handleMaximize}
+                        title={isMax ? '向下还原' : '最大化'}
+                    />
+                )}
+                {showClose && (
+                    <div
+                        className="iconfont icon-icon_close"
+                        onClick={handleClose}
+                        title="关闭"
+                    />
+                )}
+            </div>
     );
 };
 
-export default WinOp;
+export default WindowControls;

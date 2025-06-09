@@ -26,7 +26,7 @@ const MOCK_CHAT_MAP: Record<number, Message[]> = {
         { id: 3, content: '我是由 OpenAI 训练的大型语言模型。', sender: 'other', username: 'ChatGPT', avatar: '/avatar2.png' },
     ],
     5: [
-        { id: 1, content: '你好，我是 网卡助手 N1。', sender: 'other', username: 'ChatGPT', avatar: '/avatar2.png' },
+        { id: 1, content: '你好，我是 网卡助手 N1。', sender: 'other', username: '天移智能售后ai', avatar: '/avatar2.png' },
         { id: 2, content: '介绍一下自己', sender: 'me', username: 'ikun233', avatar: '/avatar.png' },
         { id: 3, content: '我是由 Enternal 训练的大型语言模型。', sender: 'other', username: 'Netcard', avatar: '/avatar2.png' },
     ],

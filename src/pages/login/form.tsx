@@ -7,6 +7,7 @@ import styles from './index.module.scss'
 import {useDispatch} from 'react-redux'
 // import {setToken, setUserInfo} from "@/store/modules/usersSlice";
 import {useNavigate} from "react-router-dom";
+import {LoginApi} from "@/api/auth";
 
 export default function LoginForm({ setLoading }: { setLoading: (v: boolean) => void }) {
     const nav = useNavigate()
@@ -17,8 +18,10 @@ export default function LoginForm({ setLoading }: { setLoading: (v: boolean) => 
 
 
     const login = async (params) => {
-        // const res = await LoginApi(params)
-        // if (res.code !== 200) return
+        console.log("params",params)
+        const res = await LoginApi(params)
+        if (res.code !== 0) return
+        localStorage.setItem("token",JSON.stringify(res.data.token))
         // dispatch(setUserInfo(res.data.username))
         // dispatch(setToken(res.data.token))
         // nav("/")
@@ -59,7 +62,7 @@ export default function LoginForm({ setLoading }: { setLoading: (v: boolean) => 
                     <Input.Password prefix={<IconLock/>} placeholder={'密码'} onPressEnter={onSubmitClick}/>
                 </Form.Item>
                 <Form.Item
-                    field="code"
+                    field="authCode"
                     rules={[{required: true, message: '请输入授权码'}]}
                 >
                     <Input allowClear placeholder={'授权码'}/>

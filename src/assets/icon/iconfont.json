@@ -6,6 +6,55 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "3019883",
+      "name": "lu-icon-maximize",
+      "font_class": "lu-icon-maximize",
+      "unicode": "e676",
+      "unicode_decimal": 58998
+    },
+    {
+      "icon_id": "3989361",
+      "name": "icon_close",
+      "font_class": "icon_close",
+      "unicode": "e683",
+      "unicode_decimal": 59011
+    },
+    {
+      "icon_id": "16661437",
+      "name": "icon／maximize",
+      "font_class": "iconmaximize",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "22142528",
+      "name": "icon-max",
+      "font_class": "icon-max",
+      "unicode": "e67b",
+      "unicode_decimal": 59003
+    },
+    {
+      "icon_id": "22471886",
+      "name": "icon_top",
+      "font_class": "icon_top",
+      "unicode": "e647",
+      "unicode_decimal": 58951
+    },
+    {
+      "icon_id": "23238226",
+      "name": "icon_min",
+      "font_class": "icon_min",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "24815614",
+      "name": "icon_top",
+      "font_class": "icon_top1",
+      "unicode": "e668",
+      "unicode_decimal": 58984
+    },
+    {
       "icon_id": "6762077",
       "name": "机器人",
       "font_class": "jiqiren",

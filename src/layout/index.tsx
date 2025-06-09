@@ -71,7 +71,6 @@ const MainLayout = () => {
                 <Layout style={{ flex: 1 }}>
                     <Outlet />
                 </Layout>
-                <WinOp showClose={true} showMax={true} showMin={true} showSetTop={true} />
             </Layout>
         </Layout>
     );

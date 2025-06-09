@@ -12,10 +12,11 @@ export const request = axios.create({
 
 // 请求拦截器，用于在每个请求中添加 token 头部信息
 request.interceptors.request.use((config) => {
+    const token = JSON.parse(<string>localStorage.getItem("token"))
   // 使用 useStore 函数获取 store 实例
   // const store = useStore();
   // 在请求头部添加 token
-  // config.headers["token"] = store.userInfo.token;
+  config.headers["token"] =token
   return config
 })
 

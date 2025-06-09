@@ -2,6 +2,8 @@ import {Avatar, Button, Input, Layout, List, Space, Typography} from "@arco-desi
 import {IconPlus, IconSearch, IconToTop} from "@arco-design/web-react/icon";
 import ChatWindow from "@/components/chatWindow";
 import {useState} from "react";
+import styles from "./index.module.scss"
+import WinOp from "@/components/winOp";
 
 const Sider = Layout.Sider;
 const Header = Layout.Header;
@@ -40,6 +42,13 @@ const Message = () => {
         {
             id: 5,
             name: '网卡助手 N1',
+            time: '昨天 12:00',
+            lastMessage: '请继续输入你的问题。',
+            avatar: '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+        },
+        {
+            id: 6,
+            name: '天移版智能ai',
             time: '昨天 12:00',
             lastMessage: '请继续输入你的问题。',
             avatar: '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
@@ -107,9 +116,14 @@ const Message = () => {
                     />
                 </div>
             </Sider>
-            <Content style={{padding: 20}}>    <ChatWindow chat={selectedChat} /></Content>
-        </Layout>
 
+            <Content style={{padding: 20}}>
+                <ChatWindow chat={selectedChat}/>
+            </Content>
+            <div className={styles.winOpWrapper}>
+                <WinOp showClose={true} showMax={true} showMin={true} showSetTop={true}/>
+            </div>
+        </Layout>
     );
 };
 
